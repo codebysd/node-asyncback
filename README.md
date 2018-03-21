@@ -1,6 +1,11 @@
-# node-asyncback
+# asyncback
 
-Use async functions as expressjs middleware functions
+![Build Status](https://travis-ci.org/codebysd/node-asyncback.svg?branch=master)
+[![npm downloads](https://img.shields.io/npm/dt/asyncback.svg)](https://www.npmjs.com/package/asyncback)
+[![Open issues](https://img.shields.io/github/issues/codebysd/node-asyncback.svg)](https://github.com/codebysd/node-asyncback/issues)
+[![Pull requests](https://img.shields.io/github/issues-pr/codebysd/node-asyncback.svg)]()
+
+Use async functions as expressjs middleware functions, or just convert async functions to callback style functions.
 
 ## Why ?
 
