@@ -6,6 +6,9 @@
   "scripts": {
     "test": "nyc mocha"
   },
+  "engines": {
+    "node": ">=7.10.1"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/codebysd/node-asyncmw.git"
