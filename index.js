@@ -32,7 +32,7 @@ function isNaP(val) {
  * @param {Function} fn async function to wrap
  * @returns {Function} normal express middleware function 
  */
-function asyncmw(fn) {
+function asyncback(fn) {
 
     // Ensure parameter is at least a function.
     if (isNaF(fn)) {
@@ -74,6 +74,6 @@ function asyncmw(fn) {
 }
 
 /** 
- * @type {asyncmw}
+ * @type {asyncback}
  */
-module.exports = asyncmw;
+module.exports = asyncback;

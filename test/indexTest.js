@@ -3,28 +3,28 @@ const expect = require('chai').expect;
 const describe = require('mocha').describe;
 const it = require('mocha').it;
 
-describe('asyncmw', () => {
+describe('asyncback', () => {
 
-    const asyncmw = require('../index');
+    const asyncback = require('../index');
 
     it('Is a function', () => {
-        expect(asyncmw).to.be.a('function');
+        expect(asyncback).to.be.a('function');
     });
 
     it('Accepts a function and returns a function', () => {
-        expect(asyncmw(sinon.spy())).to.be.a('function');
+        expect(asyncback(sinon.spy())).to.be.a('function');
     });
 
     it('Throws if given something that is not a function', () => {
-        expect(asyncmw).to.throw(Error);
-        expect(() => asyncmw([])).to.throw(Error);
-        expect(() => asyncmw({})).to.throw(Error);
+        expect(asyncback).to.throw(Error);
+        expect(() => asyncback([])).to.throw(Error);
+        expect(() => asyncback({})).to.throw(Error);
     });
 
     it('Calls the wrapped function with all arguments if called without any callback', () => {
         const wrapped = sinon.spy();
 
-        asyncmw(wrapped)('a', 1, 2);
+        asyncback(wrapped)('a', 1, 2);
         sinon.assert.calledOnce(wrapped);
         sinon.assert.calledWith(wrapped, 'a', 1, 2);
     });
@@ -33,7 +33,7 @@ describe('asyncmw', () => {
         const wrapped = sinon.spy();
 
         const next = sinon.spy();
-        asyncmw(wrapped)('a', 1, 2, next);
+        asyncback(wrapped)('a', 1, 2, next);
         sinon.assert.calledOnce(wrapped);
         sinon.assert.calledWith(wrapped, 'a', 1, 2);
     });
@@ -42,7 +42,7 @@ describe('asyncmw', () => {
         const wrapped = sinon.stub().returns('Test result');
 
         const next = sinon.spy();
-        asyncmw(wrapped)('a', 1, 2, next);
+        asyncback(wrapped)('a', 1, 2, next);
         sinon.assert.calledOnce(wrapped);
         sinon.assert.calledWith(wrapped, 'a', 1, 2);
         sinon.assert.calledOnce(next);
@@ -54,7 +54,7 @@ describe('asyncmw', () => {
         const wrapped = sinon.stub().throws(err);
 
         const next = sinon.spy();
-        asyncmw(wrapped)('a', 1, 2, next);
+        asyncback(wrapped)('a', 1, 2, next);
         sinon.assert.calledOnce(wrapped);
         sinon.assert.calledWith(wrapped, 'a', 1, 2);
         sinon.assert.calledOnce(next);
@@ -70,7 +70,7 @@ describe('asyncmw', () => {
             done();
         });
 
-        asyncmw(wrapped)('a', 1, 2, next);
+        asyncback(wrapped)('a', 1, 2, next);
         sinon.assert.calledOnce(wrapped);
         sinon.assert.calledWith(wrapped, 'a', 1, 2);
     });
@@ -85,7 +85,7 @@ describe('asyncmw', () => {
             done();
         });
 
-        asyncmw(wrapped)('a', 1, 2, next);
+        asyncback(wrapped)('a', 1, 2, next);
         sinon.assert.calledOnce(wrapped);
         sinon.assert.calledWith(wrapped, 'a', 1, 2);
     });
@@ -103,7 +103,7 @@ describe('asyncmw', () => {
             done();
         });
 
-        asyncmw(wrappedAsync)('a', 1, 2, next);
+        asyncback(wrappedAsync)('a', 1, 2, next);
         sinon.assert.calledOnce(wrapped);
         sinon.assert.calledWith(wrapped, 'a', 1, 2);
     });
@@ -122,7 +122,7 @@ describe('asyncmw', () => {
             done();
         });
 
-        asyncmw(wrappedAsync)('a', 1, 2, next);
+        asyncback(wrappedAsync)('a', 1, 2, next);
         sinon.assert.calledOnce(wrapped);
         sinon.assert.calledWith(wrapped, 'a', 1, 2);
     });

@@ -1,4 +1,4 @@
-# node-asyncmw
+# node-asyncback
 
 Use async functions as expressjs middleware functions
 
@@ -34,9 +34,9 @@ app.get('/users', function (req, res, next) {
 To this:
 
 ```javascript
-const asyncmw = require('asyncmw');
+const asyncback = require('asyncback');
 
-app.get('/users', asyncmw(async (req, res) => {
+app.get('/users', asyncback(async (req, res) => {
     const users = await User.find({ 'banned': false });
     const offer = await Offers.findOne({ 'active': true });
     res.json({ 'users': users, 'offer': offer });
@@ -49,15 +49,15 @@ app.get('/users', asyncmw(async (req, res) => {
 Install module:
 
 ```bash
-npm install asyncmw --save
+npm install asyncback --save
 ```
 
-Wrap async functions with `asyncmw` before registering them with ExpressJS:
+Wrap async functions with `asyncback` before registering them with ExpressJS:
 
 ```javascript
-const asyncmw = require('asyncmw');
+const asyncback = require('asyncback');
 
-app.get('/path', asyncmw(async (req, res) => {
+app.get('/path', asyncback(async (req, res) => {
     // async await style code
 }));
 ```
@@ -65,13 +65,13 @@ app.get('/path', asyncmw(async (req, res) => {
 Better yet, if middleware functions are in separate files, simply export the wrapped function:
 
 ```javascript
-const asyncmw = require('asyncmw');
+const asyncback = require('asyncback');
 
 async function someMiddleware(req, res){
     // async await style code
 }
 
-module.exports = asyncmw(someMiddleware);
+module.exports = asyncback(someMiddleware);
 ```
 
 # Notes
@@ -81,8 +81,8 @@ module.exports = asyncmw(someMiddleware);
 
 # Flexibility
 
-The `asyncmw` function is really generic that it converts an async function into a callback style function which accepts a callback as its last parameter. Hence its usage is not limited to just ExpressJS middleware. This also works for functions that return a promise or promise-like result.
+The `asyncback` function is really generic that it converts an async function into a callback style function which accepts a callback as its last parameter. Hence its usage is not limited to just ExpressJS middleware. This also works for functions that return a promise or promise-like result.
 
 # Safety
 
-The `asyncmw` can safely wrap non async/promised functions and the returned function can be invoked without the callback parameter. In such cases the wrapped function will be called synchronously and with all supplied arguments. However such usage is discouraged as it serves no beneficial purpose.
+The `asyncback` can safely wrap non async/promised functions and the returned function can be invoked without the callback parameter. In such cases the wrapped function will be called synchronously and with all supplied arguments. However such usage is discouraged as it serves no beneficial purpose.
