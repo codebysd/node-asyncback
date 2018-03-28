@@ -5,38 +5,28 @@
 [![Open issues](https://img.shields.io/github/issues/codebysd/node-asyncback.svg)](https://github.com/codebysd/node-asyncback/issues)
 [![Pull requests](https://img.shields.io/github/issues-pr/codebysd/node-asyncback.svg)]()
 
-Use async functions as expressjs middleware functions, or just convert async functions to callback style functions.
+Convert async functions to callback style functions.
 
 ## Why ?
 
-[ExpressJS](https://expressjs.com/) is a popular framework for [NodeJS](http://nodejs.org/) and the way it works is by letting the developer register special functions called ["middleware" functions](https://expressjs.com/en/guide/writing-middleware.html). Middleware functions must have a signature `function(request, response, next)` or `function(error, request, response, next)`. With the advent of `async await` feature, one might want to use an async function as a middleware function, instead of the callback style functions that ExpressJS uses as of now. 
+Async functions along with `await` has been touted as a very elegant way of writing async code. However there is a lot of Javascript API that requires callback functions. For example, [ExpressJS](https://expressjs.com/) requires [middleware functions](https://expressjs.com/en/guide/writing-middleware.html) to be plain old functions that accept a `next` callback.
+
+The `asyncback` module converts an async function to a callback accepting function.
 
 ### In Short
 
-From this:
+This:
 
 ```javascript
-app.get('/users', function (req, res, next) {
+async function(arg1, arg2, .., argN)
+``` 
+is converted to:
 
-    User.find({ 'banned': false }, function (err0, users) {
-        if (err) {
-            next(err0);
-        } else {
-            Offers.findOne({ 'active': true }, function (err1, offer) {
-                if (err1) {
-                    next(err1);
-                } else {
-                    res.json({ 'users': users, 'offer': offer });
-                    next();
-                }
-            });
-        }
-    });
-
-});
+```javascript
+function(arg1, arg2, .., argN, callback)
 ```
 
-To this:
+Which is awesome in cases like writing an expressjs request handler, while using mongoosejs models:
 
 ```javascript
 const asyncback = require('asyncback');

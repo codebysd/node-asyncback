@@ -75,7 +75,7 @@ describe('asyncback', () => {
         sinon.assert.calledWith(wrapped, 'a', 1, 2);
     });
 
-    it('Invokes callback with error after promisfied function rejects', (done) => {
+    it('Invokes callback with error after promisified function rejects', (done) => {
         const err = new Error('Test error');
         const wrapped = sinon.stub().rejects(err);
 
