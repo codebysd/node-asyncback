@@ -70,10 +70,24 @@ async function someMiddleware(req, res){
 module.exports = asyncback(someMiddleware);
 ```
 
+Also, if the middleware decides to stop `next` callback from being called:
+
+```javascript
+const asyncback = require('asyncback');
+
+app.get('/file', asyncback(async (req, res) => {
+    // async await style code
+    // start streaming, proceed no further
+    return asyncback.NO_CB;
+}));
+```
+
 # Notes
 
 1. The `next` callback supplied by ExpressJS will be automatically called after async middleware function returns.
 2. In case the async middleware function throws an error, the `next` callback will be called with the thrown error.
+3. In cases where the callback should not be automatically called, the async function can return a special value `asyncback.NO_CB`.
+
 
 # Flexibility
 

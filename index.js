@@ -1,3 +1,8 @@
+/** 
+ * The no callback token, when returned, callback is not called.
+ */
+const NO_CB = Symbol('No-callback token');
+
 /**
  * Check if value is nil (null or undefined).
  * @param {*} val value to check
@@ -23,6 +28,17 @@ function isNaF(val) {
  */
 function isNaP(val) {
     return isNil(val) || isNaF(val.then) || isNaF(val.catch);
+}
+
+/**
+ * Invoke callback if result os other than NO_CB
+ * @param {*} result function result value 
+ * @param {function} next next callback
+ */
+function invokeNext(result, next) {
+    if (NO_CB !== result) {
+        next();
+    }
 }
 
 /**
@@ -58,10 +74,10 @@ function asyncback(fn) {
 
                 if (isNaP(promise)) {
                     // return value is not promise like
-                    next();
+                    invokeNext(promise, next);
                 } else {
                     // bind next to promise resolution and rejection
-                    promise.then(() => next()).catch(next);
+                    promise.then((r) => invokeNext(r, next)).catch(next);
                 }
 
             } catch (err) {
@@ -72,6 +88,9 @@ function asyncback(fn) {
         }
     }
 }
+
+// add NO_CB as property
+Object.defineProperty(asyncback, 'NO_CB', { value: NO_CB, writable: false });
 
 /** 
  * @type {asyncback}

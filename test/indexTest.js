@@ -61,7 +61,7 @@ describe('asyncback', () => {
         sinon.assert.calledWith(next, err);
     });
 
-    it('Invokes callback after promisfied function resolves', (done) => {
+    it('Invokes callback after promisified function resolves', (done) => {
         const wrapped = sinon.stub().resolves('Test Result');
 
         const next = sinon.spy(() => {
@@ -92,8 +92,8 @@ describe('asyncback', () => {
 
     it('Invokes callback after async function returns', (done) => {
         const wrapped = sinon.spy();
-        const wrappedAsync = async function(){
-            wrapped.apply(wrapped,arguments);
+        const wrappedAsync = async function () {
+            wrapped.apply(wrapped, arguments);
             return 'Test Result';
         }
 
@@ -111,8 +111,8 @@ describe('asyncback', () => {
     it('Invokes callback with error after async function throws', (done) => {
         const err = new Error('Test error');
         const wrapped = sinon.spy();
-        const wrappedAsync = async function(){
-            wrapped.apply(wrapped,arguments);
+        const wrappedAsync = async function () {
+            wrapped.apply(wrapped, arguments);
             throw err;
         }
 
@@ -123,6 +123,36 @@ describe('asyncback', () => {
         });
 
         asyncback(wrappedAsync)('a', 1, 2, next);
+        sinon.assert.calledOnce(wrapped);
+        sinon.assert.calledWith(wrapped, 'a', 1, 2);
+    });
+
+    it('Does not invoke callback function if returned value is NO_CB token', (done) => {
+        const next = sinon.spy();
+        const wrapped = sinon.spy(() => {
+            process.nextTick(() => {
+                sinon.assert.notCalled(next);
+                done();
+            });
+            return asyncback.NO_CB;
+        });
+
+        asyncback(wrapped)('a', 1, 2, next);
+        sinon.assert.calledOnce(wrapped);
+        sinon.assert.calledWith(wrapped, 'a', 1, 2);
+    });
+
+    it('Does not invoke callback function if resolved value is NO_CB token', (done) => {
+        const next = sinon.spy();
+        const wrapped = sinon.spy(() => {
+            process.nextTick(() => {
+                sinon.assert.notCalled(next);
+                done();
+            });
+            return Promise.resolve(asyncback.NO_CB);
+        });
+
+        asyncback(wrapped)('a', 1, 2, next);
         sinon.assert.calledOnce(wrapped);
         sinon.assert.calledWith(wrapped, 'a', 1, 2);
     });

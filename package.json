@@ -1,6 +1,6 @@
 {
   "name": "asyncback",
-  "version": "1.0.2",
+  "version": "1.1.2",
   "description": "Use async functions as expressjs middleware functions",
   "main": "index.js",
   "scripts": {
@@ -29,8 +29,8 @@
   "devDependencies": {
     "chai": "^4.1.2",
     "coveralls": "^3.0.0",
-    "mocha": "^5.0.4",
-    "nyc": "^11.6.0",
-    "sinon": "^4.4.8"
+    "mocha": "^5.1.1",
+    "nyc": "^11.7.1",
+    "sinon": "^4.5.0"
   }
 }
