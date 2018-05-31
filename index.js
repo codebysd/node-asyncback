@@ -37,7 +37,7 @@ function isNaP(val) {
  */
 function invokeNext(result, next) {
     if (NO_CB !== result) {
-        next();
+        next(null, result);
     }
 }
 
