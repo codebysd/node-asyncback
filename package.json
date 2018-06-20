@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "nyc mocha",
-    "coveralls": "nyc report --reporter=text-lcov | coveralls"
+    "coveralls": "nyc report --reporter=text-lcov | coveralls",
+    "preversion": "npm test",
+    "postversion": "git push --follow-tags"
   },
   "engines": {
     "node": ">=7.10.1"
