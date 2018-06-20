@@ -10,7 +10,7 @@ Convert async functions to callback style functions.
 
 ## Why ?
 
-Async functions along with `await` has been touted as a very elegant way of writing async code. However there is a lot of Javascript API that requires callback functions. For example, [ExpressJS](https://expressjs.com/) requires [middleware functions](https://expressjs.com/en/guide/writing-middleware.html) to be plain old functions that accept a `next` callback.
+With the introduction of `async/await`, writing async code has become much simpler. However, there still exists Javascript API that requires you to pass in callback accepting functions. For example, [ExpressJS](https://expressjs.com/) requires [middleware functions](https://expressjs.com/en/guide/writing-middleware.html) to be plain old functions that accept a `next` callback.
 
 The `asyncback` module converts an async function to a callback accepting function.
 
@@ -27,7 +27,7 @@ is converted to:
 function(arg1, arg2, .., argN, callback)
 ```
 
-Which is awesome in cases like writing an expressjs request handler, while using mongoosejs models:
+Which is **awesome** in cases like writing an expressjs request handler, while using mongoose models:
 
 ```javascript
 const asyncback = require('asyncback');
@@ -84,9 +84,10 @@ app.get('/file', asyncback(async (req, res) => {
 
 # Notes
 
-1. The `next` callback supplied by ExpressJS will be automatically called after async middleware function returns.
-2. In case the async middleware function throws an error, the `next` callback will be called with the thrown error.
-3. In cases where the callback should not be automatically called, the async function can return a special value `asyncback.NO_CB`.
+1. The callback will be automatically called after async function returns.
+2. Any error thrown by the async function is passed as the first parameter to callback. 
+3. The return value of async function is passed as the second parameter to callback.
+3. In cases where the callback should not be automatically called, the async function can return a special value: `asyncback.NO_CB`.
 
 
 # Flexibility
@@ -96,3 +97,7 @@ The `asyncback` function is really generic that it converts an async function in
 # Safety
 
 The `asyncback` can safely wrap non async/promised functions and the returned function can be invoked without the callback parameter. In such cases the wrapped function will be called synchronously and with all supplied arguments. However such usage is discouraged as it serves no beneficial purpose.
+ 
+# Licence
+
+The source code is available under [MIT Licence](https://opensource.org/licenses/MIT). 

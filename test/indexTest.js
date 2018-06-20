@@ -39,14 +39,14 @@ describe('asyncback', () => {
     });
 
     it('Invokes callback after simple function returns', () => {
-        const wrapped = sinon.stub().returns('Test result');
+        const wrapped = sinon.stub().returns('Test Result');
 
         const next = sinon.spy();
         asyncback(wrapped)('a', 1, 2, next);
         sinon.assert.calledOnce(wrapped);
         sinon.assert.calledWith(wrapped, 'a', 1, 2);
         sinon.assert.calledOnce(next);
-        sinon.assert.calledWith(next);
+        sinon.assert.calledWith(next, undefined, 'Test Result');
     });
 
     it('Invokes callback with error after simple function throws', () => {
@@ -66,7 +66,7 @@ describe('asyncback', () => {
 
         const next = sinon.spy(() => {
             sinon.assert.calledOnce(next);
-            sinon.assert.calledWith(next);
+            sinon.assert.calledWith(next, undefined, 'Test Result');
             done();
         });
 
@@ -99,7 +99,7 @@ describe('asyncback', () => {
 
         const next = sinon.spy(() => {
             sinon.assert.calledOnce(next);
-            sinon.assert.calledWith(next);
+            sinon.assert.calledWith(next, undefined, 'Test Result');
             done();
         });
 
