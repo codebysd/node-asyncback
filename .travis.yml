@@ -15,4 +15,4 @@ deploy:
   on:
     branch: master
     tags: true
-    condition: "tag =~ ^v\\d\\.\\d\\.\\d$"
+    condition: "tag =~ ^v"
