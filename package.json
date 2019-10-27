@@ -6,7 +6,7 @@
   "scripts": {
     "test": "nyc mocha",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
-    "preversion": "npm test",
+    "preversion": "git pull && npm test",
     "postversion": "git push --follow-tags",
     "release": "npm version -m \"Release version %s\""
   },
