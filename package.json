@@ -1,6 +1,6 @@
 {
   "name": "asyncback",
-  "version": "1.2.8",
+  "version": "1.2.9",
   "description": "Use async functions as expressjs middleware functions",
   "main": "index.js",
   "scripts": {
