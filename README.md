@@ -1,5 +1,6 @@
 # asyncback
 
+[![Build Status](https://travis-ci.org/codebysd/node-asyncback.svg?branch=master)](https://travis-ci.org/codebysd/node-asyncback)
 [![Coverage Status](https://coveralls.io/repos/github/codebysd/node-asyncback/badge.svg?branch=master)](https://coveralls.io/github/codebysd/node-asyncback?branch=master)
 [![npm downloads](https://img.shields.io/npm/dt/asyncback.svg)](https://www.npmjs.com/package/asyncback)
 [![Open issues](https://img.shields.io/github/issues/codebysd/node-asyncback.svg)](https://github.com/codebysd/node-asyncback/issues)
