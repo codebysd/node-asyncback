@@ -1,13 +1,10 @@
 {
   "name": "asyncback",
-  "version": "1.2.21",
-  "description": "Use async functions as expressjs middleware functions",
+  "version": "1.2.22",
+  "description": "Convert async function to callback accepting funtion",
   "main": "index.js",
   "scripts": {
-    "test": "nyc mocha",
-    "preversion": "git pull && npm test",
-    "postversion": "git push --follow-tags",
-    "release": "npm version -m \"Release version %s\""
+    "test": "nyc mocha"
   },
   "engines": {
     "node": ">=16.0.0"
