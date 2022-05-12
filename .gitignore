@@ -63,3 +63,6 @@ typings/
 # idea
 .idea
 *.iml
+
+# nyc output
+.nyc_output
